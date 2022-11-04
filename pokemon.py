@@ -18,3 +18,19 @@ def primera_generacion():
     print(pokemon.to_string())
 
 primera_generacion()
+
+##rangos de las demas generaciones
+""" def segunda_generacion():
+    for i in range(152,252):
+def tercera_generacion():
+    for i in range(252,387):
+def cuarta_generacion():
+    for i in range(387,494):
+def quinta_generacion():
+    for i in range(494,650):
+def sexta_generacion():
+    for i in range(650,722):
+def septima_generacion():
+    for i in range(722,810):
+def octava_generacion():
+    for i in range(810,903): """

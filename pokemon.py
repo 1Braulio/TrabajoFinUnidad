@@ -10,8 +10,11 @@ def primera_generacion():
         response = re.get(f"https://pokeapi.co/api/v2/pokemon/{i}")
         data = response.json()
         lista_habilidades = []
+        url_imagen = response.json()['sprites']['front_default']
         for x in response.json()["abilities"]:
             lista_habilidades.append(x["ability"]["name"] )
-        pokemon.loc[i] = [data["name"],', '.join(lista_habilidades),f"https://pokeapi.co/api/v2/pokemon/{i}"]
-    print(pokemon)
+        
+        pokemon.loc[i] = [data["name"],', '.join(lista_habilidades),url_imagen]
+    print(pokemon.to_string())
 
+primera_generacion()

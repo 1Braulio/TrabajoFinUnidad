@@ -32,8 +32,13 @@ while True:
         milibro = Libro('./bbdd.csv')
         milibro.buscarTituloISBN();
 
-    # if a == 6:
-    # if a == 7:
+    if a == 6:
+      milibro = Libro('./bbdd.csv')
+      milibro.ordenarTitulo();
+    if a == 7:
+      milibro = Libro('./bbdd.csv')
+      milibro.buscarAutorEditorialGenero();
+      
     # if a == 8:
     # if a == 9:
     # if a == 10:

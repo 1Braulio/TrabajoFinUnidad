@@ -24,9 +24,14 @@ while True:
         milibro = Libro('./bbdd.csv')
         milibro.setRegistrarLibros();
 
-    # if a == 4:
-    #
-    # if a == 5:
+    if a == 4:
+        milibro = Libro('./bbdd.csv')
+        milibro.deleteRegistro();
+        
+    if a == 5:
+        milibro = Libro('./bbdd.csv')
+        milibro.buscarTituloISBN();
+
     # if a == 6:
     # if a == 7:
     # if a == 8:

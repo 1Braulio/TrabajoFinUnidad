@@ -28,8 +28,6 @@ class Libro():
         self.__ruta = ruta#'./bbdd.csv' #"bbdd.csv"
         self.__df = pd.read_csv(self.__ruta)
 
-
-
     def getLeerRegistrosLibros(self):
         #nrows=3
         with open(self.__ruta) as file:
@@ -88,3 +86,25 @@ class Libro():
 
         df.to_csv(self.__ruta, index=None, mode="a", header=False)
 
+    #ELIMINA SOLO POR ID
+    def deleteRegistro(self,a):
+        columnas = ["ID", "TITULO", "GENERO", "ISBN", "EDITORIAL", "AUTOR"]
+
+        self.a=a
+        #df = pd.read_csv(self.ruta)
+        self.df.drop(self.df.index[[self.a-1]],inplace=True)
+
+        #ad=pd.DataFrame(df,columns=columnas)
+        self.df.to_csv(self.ruta, index=None, mode="w", header=True,columns=columnas)
+
+
+    def buscarTituloISBN(self):
+        print("Buscar ISBN    : 1\nBuscar Titulo  : 0")
+        q=int(input("INGRESA NUMERO: "))
+        if q==1:
+            a=int(input("INGRESE ISBN: "))
+            print(self.df[self.df.ISBN==a])
+        if q==0:
+            a=input("Ingrese titulo: ")
+            self.df['TITULO']=self.df['TITULO'].str.lower()
+            print(self.df[self.__df['TITULO'].str.contains(a)])

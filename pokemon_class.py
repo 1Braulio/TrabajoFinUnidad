@@ -45,3 +45,57 @@ def typ():
             dic_type[typ['name']].append(pk['pokemon']['name'])
 
     return dic_type
+
+def ability():
+    response = requests.get(url_ability)
+    json = response.json()
+    results = json.get("results")
+    dic_ability = {}
+
+    for ab in results:
+        url = url_ability + ab['name']
+        # print(url)
+        response_1 = requests.get(url)
+        json = response_1.json()
+        dic_ability[ab['name']] = []
+
+        for pk in json.get('pokemon'):
+            dic_ability[ab['name']].append(pk['pokemon']['name'])
+    
+    return dic_ability
+
+def gen():
+    response = requests.get(url_generation)
+    json = response.json()
+    results = json.get("results")
+    dic_generation = {}
+
+    for gen in results:
+        url = url_generation + gen['name']
+        # print(url)
+        response_1 = requests.get(url)
+        json = response_1.json()
+        dic_generation[gen['name']] = []
+
+        for pk in json.get('pokemon_species'):
+            dic_generation[gen['name']].append(pk['name'])
+
+    return dic_generation
+
+def hab() -> dict:
+    response = requests.get(url_habitat)
+    json = response.json()
+    results = json.get("results")
+    dic_habitat = {}
+
+    for hab in results:
+        url = url_habitat + hab['name']
+        # print(url)
+        response_1 = requests.get(url)
+        json = response_1.json()
+        dic_habitat[hab['name']] = []
+
+        for pk in json.get('pokemon_species'):
+            dic_habitat[hab['name']].append(pk['name'])
+
+    return dic_habitat

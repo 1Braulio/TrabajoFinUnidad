@@ -3,7 +3,7 @@
 import requests as re
 import pandas as pd
 
-pokemon = pd.DataFrame(columns=["nombre","habilidad","url"])
+pokemon = pd.DataFrame(columns=["name","ability","url"])
 
 def primera_generacion():
     for i in range(1,152):
@@ -24,7 +24,36 @@ def todo_habilidades():
         response = re.get(f"https://pokeapi.co/api/v2/ability/{i}")
         habilidades.append(response.json()["names"][7]['name'] )
     print(', '.join(habilidades))
-todo_habilidades()
+""" todo_habilidades() """
+
+#funcion para listar todas las formas en orden numero ascendente
+def todo_formas ():
+    formas =[]
+    for i in range(1,15):
+        response = re.get(f"https://pokeapi.co/api/v2/pokemon-shape/{i}")
+        formas.append(response.json()['name'] )
+    print(', '.join(formas))
+""" todo_formas () """
+
+#funcion para listar todas los habitats en orden numero ascendente
+def todo_habitats():
+    habitats =[]
+    for i in range(0,9):
+        response = re.get(f"https://pokeapi.co/api/v2/pokemon-habitat/")
+        habitats.append(response.json()['results'][i]['name'])
+    print(', '.join(habitats))
+""" todo_habitats()  """
+
+#funcion para listar todas los tipos en orden numero ascendente
+def todo_types():
+    types =[]
+    for i in range(0,20):
+        response = re.get(f"https://pokeapi.co/api/v2/type/")
+        types.append(response.json()['results'][i]['name'])
+    print(', '.join(types))
+""" todo_types() """
+
+
 
 ##rangos de las demas generaciones
 """ def segunda_generacion():

@@ -16,8 +16,15 @@ def primera_generacion():
         
         pokemon.loc[i] = [data["name"],', '.join(lista_habilidades),url_imagen]
     print(pokemon.to_string())
-
-primera_generacion()
+    
+#funcion para listar todas las habilidades en orden numero ascendente
+def todo_habilidades():
+    habilidades = []
+    for i in range(1,268):
+        response = re.get(f"https://pokeapi.co/api/v2/ability/{i}")
+        habilidades.append(response.json()["names"][7]['name'] )
+    print(', '.join(habilidades))
+todo_habilidades()
 
 ##rangos de las demas generaciones
 """ def segunda_generacion():

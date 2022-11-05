@@ -40,4 +40,4 @@ def sexta_generacion():
 def septima_generacion():
     for i in range(722,810):
 def octava_generacion():
-    for i in range(810,903): """
+    for i in range(810,906): """

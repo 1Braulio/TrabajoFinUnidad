@@ -108,3 +108,23 @@ class Libro():
             a=input("Ingrese titulo: ")
             self.df['TITULO']=self.df['TITULO'].str.lower()
             print(self.df[self.__df['TITULO'].str.contains(a)])
+    
+    def ordenarTitulo(self):
+        print(self.df.sort_values('TITULO'))
+
+
+    def buscarAutorEditorialGenero(self):
+        print("Buscar Autor    : 1\nBuscar Editorial  : 2\nBuscar Genero   :3")
+        q=int(input("INGRESA NUMERO: "))
+        if q==1:
+            a = input("Ingrese Autor: ")
+            self.df['AUTOR'] = self.df['AUTOR'].str.lower()
+            print(self.df[self.df['AUTOR'].str.contains(a)])
+        if q==2:
+            a=input("Ingrese Editorial: ")
+            self.df['EDITORIAL']=self.df['EDITORIAL'].str.lower()
+            print(self.df[self.df['EDITORIAL'].str.contains(a)])
+        if q==3:
+            a=input("Ingrese Genero: ")
+            self.df['GENERO']=self.df['GENERO'].str.lower()
+            print(self.df[self.__df['GENERO'].str.contains(a)])

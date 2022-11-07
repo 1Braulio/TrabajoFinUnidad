@@ -1,6 +1,7 @@
 # TrabajoFinUnidad
 ## Proyecto Libreria:
-Para usar correctamente el programa primero hay que crear el archivo csv,para esto ejecutamos el archivo opciones.py con el comando-> python opciones.py <-
+Para usar correctamente el programa primero hay que crear el archivo csv,para esto ejecutamos el archivo opciones.py con el comando-> python opciones.py <- escribimos 1 y damos enter.
+
 Para el correcto funcionamiento del programa instala la biblioteca Pandas con el siguiente comando -> py -m pip install pandas <-
 
 El programa permite lo siguiente:

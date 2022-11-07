@@ -46,10 +46,7 @@ class Libro():
         EDITORIAL = []
         AUTOR = []
         while True:
-            nuevo_ID = input("INGRESE su ID: ")
-            while not nuevo_ID.isnumeric(): # validacion
-                nuevo_ID = input("INGRESE su ID (solo puede ser numerico): ")
-            nuevo_ID = int(nuevo_ID)
+            nuevo_ID = len(self.__df)+1
             ID.append(nuevo_ID)
 
             nuevo_TITULO = input("INGRESE TITULO: ")
@@ -70,14 +67,7 @@ class Libro():
             nuevo_AUTOR = input("PARA MAS DE 2 AUTORES SEPARAR CON / \nINGRESE AUTOR: ")
             AUTOR.append(nuevo_AUTOR)
 
-            # data = {
-            #     "ID": ID,
-            #     "TITULO": TITULO,
-            #     "GENERO": GENERO,
-            #     "ISBN": ISBN,
-            #     "EDITORIAL": EDITORIAL,
-            #     "AUTOR": AUTOR
-            # };
+
 
             a = input("SALIR? Y/N: ").upper()
             while a not in ["Y", "N"]: # validacion
@@ -100,12 +90,10 @@ class Libro():
     def deleteRegistro(self,a):
         columnas = ["ID", "TITULO", "GENERO", "ISBN", "EDITORIAL", "AUTOR"]
 
-        self.a=a
-        #df = pd.read_csv(self.ruta)
-        self.df.drop(self.df.index[[self.a-1]],inplace=True)
+        self.__a=a
+        self.__df.drop(self.__df.index[[self.a-1]],inplace=True)
 
-        #ad=pd.DataFrame(df,columns=columnas)
-        self.df.to_csv(self.ruta, index=None, mode="w", header=True,columns=columnas)
+        self.__df.to_csv(self.__ruta, index=None, mode="w", header=True,columns=columnas)
 
 
     def buscarTituloISBN(self):
@@ -142,8 +130,8 @@ class Libro():
         if q==1:
             a = input("Ingrese Autor: ")
             dfcopia = self.__df.copy() # copia para no alterar los libros
-            dfcopia['AUTORES'] = dfcopia['AUTORES'].str.lower()
-            print(dfcopia[dfcopia['AUTORES'].str.contains(a)])
+            dfcopia['AUTOR'] = dfcopia['AUTOR'].str.lower()
+            print(dfcopia[dfcopia['AUTOR'].str.contains(a)])
         if q==2:
             a=input("Ingrese Editorial: ")
             dfcopia = self.__df.copy()
@@ -154,3 +142,110 @@ class Libro():
             dfcopia = self.__df.copy()
             dfcopia['GENERO']=dfcopia['GENERO'].str.lower()
             print(dfcopia[dfcopia['GENERO'].str.contains(a)])
+
+    def buscarAutor(self):
+
+        f=self.__df[self.__df['AUTOR'].str.contains('/')]
+        indices=f.index
+
+
+        autores=list(f.AUTOR)
+
+        index_slash={}
+        for i in range (0,len(indices),1):
+
+            a=list(autores[i])
+            index_slash.__setitem__(indices[i],a.count('/'))
+            # print(i,a.count('/'))
+
+
+
+        #print(index_slash)
+        #print(contador)
+        #print(index_slash.get(1))
+
+         #numero ingresado por el usuario
+        p = int(input("INGRESA NUMERO DE AUTORES: "))-1
+        indiceFinal=[]
+        for j in index_slash:
+            if index_slash.get(j)==p:
+                 indiceFinal.append(j)
+                 #print(j) #imprime ids de las filas que debo imprimr
+
+        mostrar_datos=[]
+
+        for i in indiceFinal:
+            asd=self.__df[self.__df.index==i]
+            mostrar_datos.append(asd)
+
+
+        print(mostrar_datos)
+
+
+    def editarRegistro(self):
+
+        columnas = ["ID", "TITULO", "GENERO", "ISBN", "EDITORIAL", "AUTOR"]
+
+
+        while True:
+            limiteId=len(self.__df.axes[0])
+
+            while True:
+                fila = int(input("INGRESA ID DE REGISTRO: ")) - 1
+                if fila>=limiteId:
+                    print("Ingresa ID valido")
+                    #fila = int(input("INGRESA ID DE REGISTRO: ")) - 1
+                else: break;
+            print("-"*20)
+            print("\nTITULO:    2"
+                  "\nGENERO:    3"
+                  "\nISBN :     4"
+                  "\nEDITORIAL: 5"
+                  "\nAUTOR:     6")
+            while True:
+                col=int(input("INGRESA COLUMNA: "))
+                if col<2 or col>6:
+                    print("Ingresa dato valido")
+                else:break;
+
+            valorReemplazo=input("INGRESA VALOR NUEVO: ")
+            if col==2:
+                self.__df.loc[fila, 'TITULO'] = valorReemplazo
+                self.__df.to_csv(self.__ruta, index=None, mode="w", header=True, columns=columnas)
+                print("VALOR CAMBIADO EXITOSAMENTE")
+                self.getLeerRegistrosLibros()
+
+            elif col==3:
+                self.__df.loc[fila, 'GENERO'] = valorReemplazo
+                self.__df.to_csv(self.__ruta, index=None, mode="w", header=True, columns=columnas)
+                print("VALOR CAMBIADO EXITOSAMENTE")
+                self.getLeerRegistrosLibros()
+
+            elif col==4:
+                self.__df.loc[fila, 'ISBN'] = valorReemplazo
+                self.__df.to_csv(self.__ruta, index=None, mode="w", header=True, columns=columnas)
+                print("VALOR CAMBIADO EXITOSAMENTE")
+                self.getLeerRegistrosLibros()
+
+            elif col==5:
+                self.__df.loc[fila, 'EDITORIAL'] = valorReemplazo
+                self.__df.to_csv(self.__ruta, index=None, mode="w", header=True, columns=columnas)
+                print("VALOR CAMBIADO EXITOSAMENTE")
+                self.getLeerRegistrosLibros()
+
+            elif col==6:
+                self.__df.loc[fila, 'AUTOR'] = valorReemplazo
+                self.__df.to_csv(self.__ruta, index=None, mode="w", header=True, columns=columnas)
+                print("VALOR CAMBIADO EXITOSAMENTE")
+                self.getLeerRegistrosLibros()
+
+
+
+            if input("SEGUIR? Y/N").lower()=="y":
+                break;
+            print("CONTINUAMOS");
+
+
+
+    def guardarLibros(self):
+        print(f"Libros guardados correcatamente en el archivo {self.__ruta}")

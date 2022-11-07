@@ -1,4 +1,5 @@
 from TrabajoFinUnidad.ramaLuis import *
+import os
 def opciones():
     print("¿En que puedo ayudarte hoy? "
         "\n1)  Cargar base de datos"
@@ -23,33 +24,50 @@ while True:
     if a==0:
         break;
     if a == 1:
+        os.system("cls")
         getCrearCsv()
 
+    milibro = Libro('./bbdd.csv')
     if a == 2:
-        milibro = Libro('./bbdd.csv')
+        #milibro = Libro('./bbdd.csv')
+        os.system("cls")
         milibro.getLeerRegistrosLibros();
+
     if a==3:
-        milibro = Libro('./bbdd.csv')
+        #milibro = Libro('./bbdd.csv')
+        os.system("cls")
         milibro.setRegistrarLibros();
 
+
     if a == 4:
-        milibro = Libro('./bbdd.csv')
+       # milibro = Libro('./bbdd.csv')
+
+        os.system("cls")
         milibro.deleteRegistro();
+
         
     if a == 5:
-        milibro = Libro('./bbdd.csv')
+        #milibro = Libro('./bbdd.csv')
+        os.system("cls")
         milibro.buscarTituloISBN();
 
     if a == 6:
-      milibro = Libro('./bbdd.csv')
+      #milibro = Libro('./bbdd.csv')
+      os.system("cls")
       milibro.ordenarTitulo();
     if a == 7:
-      milibro = Libro('./bbdd.csv')
+      #milibro = Libro('./bbdd.csv')
+      os.system("cls")
       milibro.buscarAutorEditorialGenero();
       
     if a == 8:
-        break
+        os.system("cls")
+        milibro.buscarAutor();
+
     if a == 9:
-        break
+        os.system("cls")
+        milibro.editarRegistro()
+
     if a == 10:
-        break
+        os.system("cls")
+        milibro.guardarLibros()
